@@ -17,6 +17,8 @@ class Ball(pygame.Rect):
 
 b = Ball(40, 40, DEFAULT_BALL_RADIUS)
 
+pygame.display.init()
+
 while True:
     clock.tick(FPS)
 
@@ -25,6 +27,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == K_ESCAPE:
+                pygame.display.quit()
                 exit(0)
 
     pygame.display.flip()
