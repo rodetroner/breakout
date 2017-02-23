@@ -2,8 +2,8 @@ import pygame
 from pygame.locals import *
 
 FPS = 60
-BALL_RADIUS = 10
-BALL_COLOR = (255, 0, 0)
+DEFAULT_BALL_RADIUS = 10
+DEFAULT_BALL_COLOR = (255, 0, 0)
 
 screen = pygame.display.set_mode((1024, 768))
 clock = pygame.time.Clock()
@@ -15,12 +15,12 @@ class Ball(pygame.Rect):
         self.width = 2 * radius
         self.height = 2 * radius
 
-b = Ball(40, 40, 15)
+b = Ball(40, 40, DEFAULT_BALL_RADIUS)
 
 while True:
     clock.tick(FPS)
 
-    pygame.draw.rect(screen, BALL_COLOR, b);
+    pygame.draw.rect(screen, DEFAULT_BALL_COLOR, b);
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
