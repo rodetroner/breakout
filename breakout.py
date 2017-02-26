@@ -64,6 +64,8 @@ while True:
     if (b.left <= screenRect.left or b.right >= screenRect.right):
         b.direction = math.pi - b.direction
 
+    if p.colliderect(b):
+        b.direction = -b.direction
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
