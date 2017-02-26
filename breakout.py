@@ -23,9 +23,11 @@ class Ball(pygame.Rect):
         self.width = 2 * radius
         self.height = 2 * radius
 
-    def setXY(self, x, y):
-        self.centerx += x 
-        self.centery += y
+    def setX(self, x):
+        self.centerx = x 
+
+    def setY(self, y):
+        self.centery = y
 
 class Paddle(pygame.Rect):
 
@@ -37,7 +39,14 @@ class Paddle(pygame.Rect):
         self.width = length
         self.height = 5
 
-screenRect = screen.get_rect()
+    def setX(self, x):
+        self.centerx = x 
+
+    def setY(self, y):
+        self.centery = y
+
+
+screen_rect = screen.get_rect()
 
 b = Ball(120, 40, DEFAULT_BALL_RADIUS)
 p = Paddle(200, 700, 100)
@@ -59,13 +68,19 @@ while True:
     b.move_ip(x_ball_offset, y_ball_offset)
     p.move_ip(x_paddle_offset, 0)
 
-    if (b.top <= screenRect.top or b.bottom >= screenRect.bottom):
+    if (b.top <= screen_rect.top or b.bottom >= screen_rect.bottom):
         b.direction = -b.direction
-    if (b.left <= screenRect.left or b.right >= screenRect.right):
+    if (b.left <= screen_rect.left or b.right >= screen_rect.right):
         b.direction = math.pi - b.direction
 
     if p.colliderect(b):
         b.direction = -b.direction
+
+    if p.left <= screen_rect.left:
+        p.setX(screen_rect.left + p.width/2)
+
+    if p.right >= screen_rect.right:
+        p.setX(screen_rect.right - p.width/2)
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
