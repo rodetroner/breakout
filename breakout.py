@@ -15,7 +15,8 @@ clock = pygame.time.Clock()
 
 class Ball(pygame.Rect):
 
-    direction = math.pi / 3
+    # starting direction = 60 degrees
+    direction = math.pi / 2
     speed = 7 
 
     def __init__(self, x, y, radius):
