@@ -16,7 +16,7 @@ clock = pygame.time.Clock()
 class Ball(pygame.Rect):
 
     # starting direction = 60 degrees
-    direction = math.pi / 2
+    direction = math.pi / 3
     speed = 7 
 
     def __init__(self, x, y, radius):
@@ -52,7 +52,7 @@ class Paddle(pygame.Rect):
 screen_rect = screen.get_rect()
 
 b = Ball(120, 40, DEFAULT_BALL_RADIUS)
-p = Paddle(200, 700, 100)
+paddle = Paddle(200, 700, 100)
 
 x_paddle_offset = 0
 
@@ -63,28 +63,28 @@ while True:
     screen.fill((0,0,0))
 
     pygame.draw.rect(screen, DEFAULT_BALL_COLOR, b)
-    pygame.draw.rect(screen, DEFAULT_PADDLE_COLOR, p)
+    pygame.draw.rect(screen, DEFAULT_PADDLE_COLOR, paddle)
 
     if (b.top <= screen_rect.top or b.bottom >= screen_rect.bottom):
         b.direction = -b.direction
     if (b.left <= screen_rect.left or b.right >= screen_rect.right):
         b.direction = math.pi - b.direction
 
-    if p.colliderect(b):
+    if paddle.colliderect(b):
         b.direction = -b.direction
 
-    if p.left <= screen_rect.left:
-        p.setX(screen_rect.left + p.width/2)
+    if paddle.left <= screen_rect.left:
+        paddle.setX(screen_rect.left + paddle.width/2)
 
-    if p.right >= screen_rect.right:
-        p.setX(screen_rect.right - p.width/2)
+    if paddle.right >= screen_rect.right:
+        paddle.setX(screen_rect.right - paddle.width/2)
 
     keys = pygame.key.get_pressed()
 
     if keys[K_LEFT]:
-        x_paddle_offset = -p.speed
+        x_paddle_offset = -paddle.speed
     elif keys[K_RIGHT]:
-        x_paddle_offset = p.speed
+        x_paddle_offset = paddle.speed
     else:
         x_paddle_offset = 0
 
@@ -97,7 +97,7 @@ while True:
     x_ball_offset = round(b.speed * math.cos(b.direction))
     y_ball_offset = round(b.speed * math.sin(b.direction))
     b.move_ip(x_ball_offset, y_ball_offset)
-    p.move_ip(x_paddle_offset, 0)
+    paddle.move_ip(x_paddle_offset, 0)
 
     pygame.display.flip()
 
