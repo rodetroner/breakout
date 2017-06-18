@@ -12,10 +12,12 @@ SCREEN_Y = 768
 screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
 clock = pygame.time.Clock()
 
+
 class Ball(pygame.Rect):
 
     direction = math.pi / 3
     speed = 7 
+
     def __init__(self, x, y, radius):
         self.centerx = x
         self.centery = y
@@ -27,6 +29,7 @@ class Ball(pygame.Rect):
 
     def setY(self, y):
         self.centery = y
+
 
 class Paddle(pygame.Rect):
 
@@ -94,7 +97,6 @@ while True:
     y_ball_offset = round(b.speed * math.sin(b.direction))
     b.move_ip(x_ball_offset, y_ball_offset)
     p.move_ip(x_paddle_offset, 0)
-
 
     pygame.display.flip()
 
