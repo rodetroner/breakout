@@ -65,6 +65,7 @@ while True:
 
     pygame.draw.rect(screen, DEFAULT_PADDLE_COLOR, paddle)
 
+	# Control direction of balls after bounce
     for b in balls:
         pygame.draw.rect(screen, DEFAULT_BALL_COLOR, b)
         if (b.top <= screen_rect.top or b.bottom >= screen_rect.bottom):
@@ -74,14 +75,17 @@ while True:
         if paddle.colliderect(b):
             b.direction = -b.direction
 
+	# Prevent the paddle from crossing window border
     if paddle.left <= screen_rect.left:
         paddle.setX(screen_rect.left + paddle.width/2)
 
     if paddle.right >= screen_rect.right:
         paddle.setX(screen_rect.right - paddle.width/2)
 
+	# Get pressed keys
     keys = pygame.key.get_pressed()
 
+	# Controls of the paddle
     if keys[K_LEFT]:
         x_paddle_offset = -paddle.speed
     elif keys[K_RIGHT]:
@@ -89,12 +93,14 @@ while True:
     else:
         x_paddle_offset = 0
 
+	# Check if the player wants to exit by pressing Esc
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == K_ESCAPE:
                 pygame.display.quit()
                 exit(0)
 
+	# Update balls' positions
     for b in balls:
         x_ball_offset = round(b.speed * math.cos(b.direction))
         y_ball_offset = round(b.speed * math.sin(b.direction))
