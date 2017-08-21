@@ -67,10 +67,10 @@ screen_rect = screen.get_rect()
 balls = []
 balls.append(Ball(120, 40, DEFAULT_BALL_RADIUS))
 tiles = []
-tiles.append(Tile(800, 200, 20, 205))
-tiles.append(Tile(200, 300, 30, 200))
-tiles.append(Tile(600, 50, 300, 60))
 tiles.append(Tile(20, 600, 20, 200))
+for i in range(0, 400, 100):
+    for j in range(0, 1000, 100):
+        tiles.append(Tile(j, i, 90, 90))
 paddle = Paddle(200, 700, 100)
 
 x_paddle_offset = 0
