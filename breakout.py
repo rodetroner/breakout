@@ -78,7 +78,6 @@ while True:
 	# Prevent the paddle from crossing window border
     if paddle.left <= screen_rect.left:
         paddle.setX(screen_rect.left + paddle.width/2)
-
     if paddle.right >= screen_rect.right:
         paddle.setX(screen_rect.right - paddle.width/2)
 
@@ -100,7 +99,7 @@ while True:
                 pygame.display.quit()
                 exit(0)
 
-	# Update balls' positions
+	# Update positions of balls and paddle
     for b in balls:
         x_ball_offset = round(b.speed * math.cos(b.direction))
         y_ball_offset = round(b.speed * math.sin(b.direction))
