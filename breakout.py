@@ -13,7 +13,6 @@ SCREEN_Y = 768
 screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
 clock = pygame.time.Clock()
 
-
 class Ball(pygame.Rect):
 
     # starting direction = 60 degrees
@@ -57,6 +56,7 @@ class Tile(pygame.Rect):
         self.width = width
         self.height = height
 
+''' End the game '''
 def endGame():
     pygame.display.quit()
     exit(0)
@@ -67,7 +67,7 @@ screen_rect = screen.get_rect()
 balls = []
 balls.append(Ball(120, 40, DEFAULT_BALL_RADIUS))
 tiles = []
-tiles.append(Tile(130, 200, 50, 25))
+tiles.append(Tile(800, 200, 200, 25))
 paddle = Paddle(200, 700, 100)
 
 x_paddle_offset = 0
@@ -92,6 +92,9 @@ while True:
             endGame()
         if (b.left <= screen_rect.left or b.right >= screen_rect.right):
             b.direction = math.pi - b.direction
+        for t in tiles:
+            if t.colliderect(b):
+                b.direction = -b.direction
         if paddle.colliderect(b):
             b.direction = -b.direction
 
