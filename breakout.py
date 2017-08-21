@@ -67,7 +67,10 @@ screen_rect = screen.get_rect()
 balls = []
 balls.append(Ball(120, 40, DEFAULT_BALL_RADIUS))
 tiles = []
-tiles.append(Tile(800, 200, 200, 25))
+tiles.append(Tile(800, 200, 20, 205))
+tiles.append(Tile(200, 300, 30, 200))
+tiles.append(Tile(600, 50, 300, 60))
+tiles.append(Tile(20, 600, 20, 200))
 paddle = Paddle(200, 700, 100)
 
 x_paddle_offset = 0
@@ -87,18 +90,24 @@ while True:
     for b in balls:
         pygame.draw.rect(screen, DEFAULT_BALL_COLOR, b)
         # Collision with top border
-        if (b.top <= screen_rect.top):
+        if b.top <= screen_rect.top:
             b.direction = -b.direction
         # If ball touches the ground, stop the game
-        if (b.bottom >= screen_rect.bottom):
+        if b.bottom >= screen_rect.bottom:
             endGame()
         # Collision with side border
-        if (b.left <= screen_rect.left or b.right >= screen_rect.right):
+        if b.left <= screen_rect.left or b.right >= screen_rect.right:
             b.direction = math.pi - b.direction
         # Collision with tiles
         for t in tiles:
-            if t.colliderect(b):
+            if b.bottom > t.top and b.bottom < t.bottom and b.left > t.left and b.right < t.right:
                 b.direction = -b.direction
+            elif b.top < t.bottom and b.top > t.top and b.left > t.left and b.right < t.right:
+                b.direction = -b.direction
+            elif b.right > t.left and b.right < t.right and b.top > t.top and b.bottom < t.bottom:
+                b.direction = math.pi - b.direction
+            elif b.left < t.right and b.left > t.left and b.top > t.top and b.bottom < t.bottom:
+                b.direction = math.pi - b.direction
         # Collision with paddle
         if paddle.colliderect(b):
             b.direction = -b.direction
