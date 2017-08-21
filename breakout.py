@@ -6,6 +6,7 @@ FPS = 60
 DEFAULT_BALL_RADIUS = 3 
 DEFAULT_BALL_COLOR = (255, 0, 0)
 DEFAULT_PADDLE_COLOR = (255, 0, 0)
+DEFAULT_TILE_COLOR = (0, 255, 0)
 SCREEN_X = 1024
 SCREEN_Y = 768
 
@@ -48,6 +49,14 @@ class Paddle(pygame.Rect):
     def setY(self, y):
         self.centery = y
 
+class Tile(pygame.Rect):
+    
+    def __init__(self, x, y, width, height):
+        self.centerx = x
+        self.centery = y
+        self.width = width
+        self.height = height
+
 def endGame():
     pygame.display.quit()
     exit(0)
@@ -56,6 +65,8 @@ screen_rect = screen.get_rect()
 
 balls = []
 balls.append(Ball(120, 40, DEFAULT_BALL_RADIUS))
+tiles = []
+tiles.append(Tile(130, 200, 50, 25))
 paddle = Paddle(200, 700, 100)
 
 x_paddle_offset = 0
@@ -67,6 +78,9 @@ while True:
     screen.fill((0,0,0))
 
     pygame.draw.rect(screen, DEFAULT_PADDLE_COLOR, paddle)
+
+    for t in tiles:
+        pygame.draw.rect(screen, DEFAULT_TILE_COLOR, t)
 
     # Control direction of balls after bounce
     for b in balls:
