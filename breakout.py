@@ -86,15 +86,20 @@ while True:
     # Control direction of balls after bounce
     for b in balls:
         pygame.draw.rect(screen, DEFAULT_BALL_COLOR, b)
+        # Collision with top border
         if (b.top <= screen_rect.top):
             b.direction = -b.direction
+        # If ball touches the ground, stop the game
         if (b.bottom >= screen_rect.bottom):
             endGame()
+        # Collision with side border
         if (b.left <= screen_rect.left or b.right >= screen_rect.right):
             b.direction = math.pi - b.direction
+        # Collision with tiles
         for t in tiles:
             if t.colliderect(b):
                 b.direction = -b.direction
+        # Collision with paddle
         if paddle.colliderect(b):
             b.direction = -b.direction
 
