@@ -63,6 +63,7 @@ def endGame():
 
 screen_rect = screen.get_rect()
 
+# Create instances of balls, tiles and paddle
 balls = []
 balls.append(Ball(120, 40, DEFAULT_BALL_RADIUS))
 tiles = []
