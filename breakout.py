@@ -108,6 +108,8 @@ while True:
                 b.direction = math.pi - b.direction
             elif b.left < t.right and b.left > t.left and b.top > t.top and b.bottom < t.bottom:
                 b.direction = math.pi - b.direction
+            if t.colliderect(b):
+                tiles.remove(t)
         # Collision with paddle
         if paddle.colliderect(b):
             b.direction = -b.direction
