@@ -71,8 +71,10 @@ while True:
     # Control direction of balls after bounce
     for b in balls:
         pygame.draw.rect(screen, DEFAULT_BALL_COLOR, b)
-        if (b.top <= screen_rect.top or b.bottom >= screen_rect.bottom):
+        if (b.top <= screen_rect.top):
             b.direction = -b.direction
+        if (b.bottom >= screen_rect.bottom):
+            endGame()
         if (b.left <= screen_rect.left or b.right >= screen_rect.right):
             b.direction = math.pi - b.direction
         if paddle.colliderect(b):
